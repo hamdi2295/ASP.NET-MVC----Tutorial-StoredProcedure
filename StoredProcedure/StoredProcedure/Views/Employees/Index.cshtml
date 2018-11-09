@@ -1,0 +1,66 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="container">
+    <h2>Employees Record</h2>
+    <a class="btn btn-primary" href="@Url.Action("Add","Employees")">Add New Employee</a><br /><br />
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>
+                    FirstName
+                </th>
+                <th>
+                    LastName
+                </th>
+                <th>
+                    Gender
+                </th>
+                <th>
+                    Address
+                </th>
+                <th>
+                    PhoneNumber
+                </th>
+                <th>
+                    Action
+                </th>
+            </tr>
+        </thead>
+        <tbody class="tbody">
+            @foreach (System.Data.DataRow dr in ViewBag.emp.Rows)
+            {
+                <tr>
+                    <td>
+                        @dr["FirstName"]
+                    </td>
+                    <td>
+                        @dr["LastName"]
+                    </td>
+                    <td>
+                        @dr["Gender"]
+                    </td>
+                    <td>
+                        @dr["Address"]
+                    </td>
+                    <td>
+                        @dr["PhoneNumber"]
+                    </td>
+                    <td>
+                        <a class="btn btn-warning" href="/Employees/Edit?id=@dr["Id"]">Edit</a>
+                        <a class="btn btn-danger" href="/Employees/Delete?id=@dr["Id"]">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@{ 
+    if (TempData["msg"] != null)
+    {
+        <script>alert('@TempData["msg"]')</script>
+    }
+}
